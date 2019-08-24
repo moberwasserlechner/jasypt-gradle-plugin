@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
 	compile gradleApi()
-	compile "org.jasypt:jasypt:jar:1.9.3"
+	compile "org.jasypt:jasypt:1.9.3"
 	testCompile "junit:junit:4.12"
 }
 
@@ -45,6 +45,9 @@ publishing {
 
 			artifact sourcesJar
 			artifact javadocJar
+			afterEvaluate {
+				groupId = project.group
+			}
 		}
 	}
 }
