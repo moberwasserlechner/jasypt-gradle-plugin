@@ -1,0 +1,88 @@
+plugins {
+	id "com.jfrog.bintray" version "1.8.4"
+}
+
+apply plugin: "java"
+apply plugin: "maven"
+apply plugin: "maven-publish"
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile gradleApi()
+	compile "org.jasypt:jasypt:jar:1.9.3"
+	testCompile "junit:junit:4.12"
+}
+
+// ###################################
+// ### Publish to local maven repo ###
+// ###################################
+
+// custom tasks for creating source/javadoc jars
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+	archives sourcesJar, javadocJar
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+
+			artifact sourcesJar
+			artifact javadocJar
+		}
+	}
+}
+
+// ##########################
+// ### Publish to bintray ###
+// ##########################
+
+bintray {
+	user = project.hasProperty('BINTRAY_USER') ? BINTRAY_USER : null //this usually comes from gradle.properties file in ~/.gradle
+	key = project.hasProperty('BINTRAY_API_KEY') ? BINTRAY_API_KEY : null //this usually comes from gradle.properties file in ~/.gradle
+
+	// configurations = ['archives'] //When uploading configuration files
+	// - OR -
+	publications = ['mavenJava'] //When uploading Maven-based publication files
+
+
+	dryRun = false //Whether to run this as dry-run, without deploying
+	publish = false //If version should be auto published after an upload
+
+	// Package configuration. The plugin will use the repo and name properties to check if the package already exists.
+	// In that case, there's no need to configure the other package properties (like userOrg, desc, etc).
+	pkg {
+		repo = 'maven'
+		name = 'jasypt-gradle-plugin'
+		//userOrg = 'byteowls' //An optional organization name when the repo belongs to one of the user's orgs
+		desc = 'Jasypt value encryption plugin for Gradle 4.10.+'
+		websiteUrl = 'https://github.com/moberwasserlechner/jasypt-gradle-plugin'
+		issueTrackerUrl = 'https://github.com/moberwasserlechner/jasypt-gradle-plugin/issues'
+		vcsUrl = 'https://github.com/moberwasserlechner/jasypt-gradle-plugin.git'
+		licenses = ['MIT']
+		labels = ['jasypt', 'gradle', 'encryption']
+		publicDownloadNumbers = true
+
+		version {
+			name = project.version //Bintray logical version name
+			// desc = 'optional'
+			vcsTag = project.version
+		}
+	}
+}
