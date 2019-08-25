@@ -13,7 +13,7 @@ Add a buildscript dependency:
 ```
 buildscript {
 	repositories {
-		mavenCentral()
+		jcenter()
 	}
 	dependencies {
 		classpath "com.byteowls:jasypt-gradle-plugin:1.0.0"
