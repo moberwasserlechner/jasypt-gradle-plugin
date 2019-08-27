@@ -5,7 +5,11 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/moberwasserlechner)
 
-This plugin was inspired by "mowedgrass/jasypt-gradle-boot" working with Gradle 4.10+ without the dependency to Spring Boot. I encrypt my credentials with it and use it with "ulisesbocchio/jasypt-spring-boot"
+This plugin was inspired by "mowedgrass/jasypt-gradle-boot".
+
+This plugin works with Gradle 4.10+ and does not have a dependency to Spring Boot but can be used with it. It only depends on Jasypt.
+
+I wrote it especially for the usage with "ulisesbocchio/jasypt-spring-boot" as I needed to encrypt my credentials somehow.
 
 ## Usage
 
