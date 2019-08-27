@@ -1,5 +1,6 @@
 package com.byteowls.gradle.tasks.file;
 
+import com.byteowls.gradle.JasyptPluginConstants;
 import org.jasypt.util.text.TextEncryptor;
 
 /**
@@ -7,10 +8,14 @@ import org.jasypt.util.text.TextEncryptor;
  */
 public class EncryptPropertiesFileTask extends PropertiesFileAwareTask {
 
+    public static final String TASK_NAME = "encryptProperties";
+    private static final String TASK_DESCRIPTION = "Encrypts the property values wrapped with 'ENCRYPT(plain_text)'";
     private static final String ENCRYPT_EXTRACTION_REGEX = "ENCRYPT\\((.*)\\)";
 
-    public static final String TASK_NAME = "encryptProperties";
-//    public static final String TASK_DESCRIPTION = "Encrypts the plain_text wrapped with 'ENCRYPT(plain_text)'";
+    public EncryptPropertiesFileTask() {
+        this.setGroup(JasyptPluginConstants.TASK_GROUP_NAME);
+        this.setDescription(TASK_DESCRIPTION);
+    }
 
     @Override
     public void validateOptions() {

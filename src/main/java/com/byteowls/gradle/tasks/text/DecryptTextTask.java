@@ -1,12 +1,19 @@
 package com.byteowls.gradle.tasks.text;
 
+import com.byteowls.gradle.JasyptPluginConstants;
+
 /**
  * @author m.oberwasserlechner@byteowls.com
  */
 public class DecryptTextTask extends TextAwareTask {
 
     public static final String TASK_NAME = "decryptText";
-//    public static final String TASK_DESCRIPTION = "Encrypts the given text";
+    private static final String TASK_DESCRIPTION = "Decrypts the given text";
+
+    public DecryptTextTask() {
+        this.setGroup(JasyptPluginConstants.TASK_GROUP_NAME);
+        this.setDescription(TASK_DESCRIPTION);
+    }
 
     @Override
     public void taskAction() {

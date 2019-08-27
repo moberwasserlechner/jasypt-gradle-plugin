@@ -16,13 +16,13 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath "com.byteowls:jasypt-gradle-plugin:1.0.0"
+		classpath "com.byteowls:jasypt-gradle-plugin:1.0.1"
 	}
 }
 ```
 Apply the plugin:
 ```
-apply plugin: "jasypt"
+apply plugin: "com.byteowls.jasypt"
 ```
 
 ## Tasks
@@ -67,6 +67,9 @@ The original files are always backed up unless you add `--no-backup`.
 ```
 ./gradlew decryptText --text=UjNjJVq8ly/oU3JGMNiQXw== --password=encryptor_password
 ```
+
+## Changelog
+See [CHANGELOG](https://github.com/moberwasserlechner/jasypt-gradle-plugin/blob/master/CHANGELOG.md).
 
 ## License
 
