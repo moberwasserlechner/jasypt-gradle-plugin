@@ -13,7 +13,7 @@ I wrote it especially for the usage with "ulisesbocchio/jasypt-spring-boot" as I
 
 ## Usage
 
-Add a buildscript dependency:
+Add a `buildscript` block to the top of your `build.gradle` :
 ```
 buildscript {
 	repositories {
@@ -24,10 +24,13 @@ buildscript {
 	}
 }
 ```
-Apply the plugin:
+Apply the plugin by adding that to your `build.gradle`
 ```
 apply plugin: "com.byteowls.jasypt"
 ```
+**Note**: This plugin can not be discovered within the `plugin` block right now but `apply plugin: ...` and the `plugin` block can coexist beside each other.
+
+Run `./gradlew tasks´ to ensure that the plugin is loaded.
 
 ## Tasks
 
