@@ -2,6 +2,7 @@ package com.byteowls.gradle.tasks;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.internal.tasks.options.OptionValidationException;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.options.Option;
 import org.jasypt.util.text.BasicTextEncryptor;
@@ -14,7 +15,10 @@ import org.jasypt.util.text.TextEncryptor;
 public abstract class PasswordAwareTask extends DefaultTask {
 
     private String password;
+
     private boolean strongEncryption;
+
+    @Internal
     private TextEncryptor encryptor;
 
     protected TextEncryptor getEncryptor() {
