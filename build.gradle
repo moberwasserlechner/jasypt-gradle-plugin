@@ -1,9 +1,10 @@
 plugins {
-	id "com.jfrog.bintray" version "1.8.4"
+	id "com.jfrog.bintray" version "1.+"
+	id 'java-gradle-plugin'
 }
 
 apply plugin: "java"
-apply plugin: "maven"
+//apply plugin: "maven"
 apply plugin: "maven-publish"
 
 sourceCompatibility = 1.8
@@ -13,9 +14,9 @@ repositories {
 }
 
 dependencies {
-	compile gradleApi()
-	compile "org.jasypt:jasypt:1.9.3"
-	testCompile "junit:junit:4.12"
+	implementation gradleApi()
+	implementation "org.jasypt:jasypt:1.9.3"
+	testImplementation "junit:junit:4.12"
 }
 
 // ###################################
@@ -45,12 +46,19 @@ publishing {
 
 			artifact sourcesJar
 			artifact javadocJar
-			afterEvaluate {
-				groupId = project.group
-			}
 		}
 	}
 }
+
+gradlePlugin {
+	plugins {
+		jasyptPlugin {
+			id = 'com.byteowls.jasypt'
+			implementationClass = 'com.byteowls.gradle.JasyptPlugin'
+        	}
+	}
+}	
+
 
 // ##########################
 // ### Publish to bintray ###
@@ -74,7 +82,7 @@ bintray {
 		repo = 'maven'
 		name = 'jasypt-gradle-plugin'
 		//userOrg = 'byteowls' //An optional organization name when the repo belongs to one of the user's orgs
-		desc = 'Jasypt value encryption plugin for Gradle 4.10.+'
+		desc = 'Jasypt value encryption plugin for Gradle 7.0.+'
 		websiteUrl = 'https://github.com/moberwasserlechner/jasypt-gradle-plugin'
 		issueTrackerUrl = 'https://github.com/moberwasserlechner/jasypt-gradle-plugin/issues'
 		vcsUrl = 'https://github.com/moberwasserlechner/jasypt-gradle-plugin.git'

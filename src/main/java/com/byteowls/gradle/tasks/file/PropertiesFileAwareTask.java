@@ -1,6 +1,7 @@
 package com.byteowls.gradle.tasks.file;
 
 import com.byteowls.gradle.tasks.PasswordAwareTask;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.options.Option;
 import org.jasypt.util.text.TextEncryptor;
 
@@ -59,8 +60,14 @@ public abstract class PropertiesFileAwareTask extends PasswordAwareTask {
     }
 
     public abstract String process(TextEncryptor encryptor, String extractedValue);
+
+    @Internal
     public abstract String getPropertyPrefix();
+
+    @Internal
     public abstract String getPropertySuffix();
+
+    @Internal
     public abstract String getDefaultExtractRegex();
 
     @Override
