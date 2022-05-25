@@ -1,5 +1,6 @@
 plugins {
 	id "com.jfrog.bintray" version "1.+"
+	id 'java-gradle-plugin'
 }
 
 apply plugin: "java"
@@ -45,12 +46,19 @@ publishing {
 
 			artifact sourcesJar
 			artifact javadocJar
-			afterEvaluate {
-				groupId = project.group
-			}
 		}
 	}
 }
+
+gradlePlugin {
+	plugins {
+		jasyptPlugin {
+			id = 'com.byteowls.jasypt'
+			implementationClass = 'com.byteowls.gradle.JasyptPlugin'
+        	}
+	}
+}	
+
 
 // ##########################
 // ### Publish to bintray ###
